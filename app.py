@@ -3,9 +3,9 @@
 #################################################
 
 # Dependencies and Setup
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
-import scrape_mars
+import scraping
 
 #################################################
 # Flask Setup
@@ -24,10 +24,10 @@ mongo = PyMongo(app)
 # Root Route to Query MongoDB & Pass Mars Data Into HTML Template: index.html to Display Data
 @app.route("/")
 def index():
-    mars = mongo.db.mars.find_one()
-    return render_template("index.html", mars=mars)
+      mars = mongo.db.mars.find_one()
+      return render_template("index.html", mars=mars)
 
-# Scrape Route to Import `scrape_mars.py` Script & Call `scrape` Function
+# Scrape Route to Import `scrapping.py` Script & Call `scrape` Function
 @app.route("/scrape")
 def scrape():
    mars = mongo.db.mars
