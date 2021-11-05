@@ -11,11 +11,11 @@ import pandas as pd
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-# In[ ]:
+# In[2]:
 
 
 # Set the executable path and initialize Splinter
-executable_path = {'executable_path': ChromeDriverManager().install()}
+executable_path = {'executable_path': 'C:\Program Files\Google\Chrome\Application\chromedriver_win32\chromedriver.exe'}
 browser = Browser('chrome', **executable_path, headless=False)
 
 
@@ -149,23 +149,19 @@ browser.visit(url)
 # 2. Create a list to hold the images and titles.
 hemisphere_image_urls = []
 
+#items = browser.find_by_css('a.product-item h3')
 # 3. Write code to retrieve the image urls and titles for each hemisphere.
-with ChromeBrowser(mars_hemispheres_url) as browser: 
-    html = browser.html
-    soup = bs(html, "html.parser")
-    results = soup.find(class_="result-list").find_all(class_="item")
-    for result in results:
-        hemisphere = {}
-        hemisphere["title"] = result.find("h3").text
-        browser.links.find_by_partial_text(hemisphere["title"]).click()
-        html = browser.html
-        soup = bs(html, "html.parser")
-        hemisphere["img_url"] = astrogeology_url + soup.find(class_="wide-image")["src"]
-        hemisphere_image_urls.append(hemisphere)
-        browser.back()
-        
-for url in hemisphere_image_urls:
-    print(url)
+for i in range(4):
+    #create empty dictionary
+    hemispheres = {}
+    browser.find_by_css('a.product-item h3')[i].click()
+    element = browser.find_link_by_text('Sample').first
+    img_url = element['href']
+    title = browser.find_by_css("h2.title").text
+    hemispheres["img_url"] = img_url
+    hemispheres["title"] = title
+    hemisphere_image_urls.append(hemispheres)
+    browser.back()
 
 
 # In[18]:
@@ -179,7 +175,7 @@ hemisphere_image_urls
 
 
 # 5. Quit the browser
-browser.quit()
+#browser.quit()
 
 
 # In[ ]:

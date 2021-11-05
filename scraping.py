@@ -4,22 +4,27 @@ from splinter import Browser
 from bs4 import BeautifulSoup as soup
 import pandas as pd
 import datetime as dt
+from selenium import webdriver
 
 
 def scrape_all():
-    # Initiate headless driver for deployment
-    browser = Browser("chrome", executable_path="chromedriver", headless=True)
-
+    executable_path = {'executable_path': 'C:\Program Files\Google\Chrome\Application\chromedriver_win32\chromedriver.exe'}
+    browser = Browser("chrome", **executable_path, headless=False)
     news_title, news_paragraph = mars_news(browser)
+    img_url = featured_image(browser)
+    mars_weather = twitter_weather(browser)
+    facts = mars_facts()
+    hemisphere_image_urls = hemisphere(browser)
+    timestamp = dt.datetime.now()
 
-    # Run all scraping functions and store results in a dictionary
     data = {
         "news_title": news_title,
         "news_paragraph": news_paragraph,
-        "featured_image": featured_image(browser),
-        "facts": mars_facts(),
-        "last_modified": dt.datetime.now(),
-        "hemispheres": hemispheres(browser)
+        "featured_image": img_url,
+        "weather": mars_weather,
+        "facts": facts,
+        "hemispheres": hemisphere_image_urls,
+        "last_modified": timestam
     }
 
     # Stop webdriver and return data
