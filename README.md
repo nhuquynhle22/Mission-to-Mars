@@ -45,3 +45,7 @@ Build a Web Application that Scrapes Various Websites for Data Related to the Mi
     * Store the return value in Mongo as a Python Dictionary
 * Create a root route `/` that will query the Mongo database and pass the Mars Data into an HTML template to display the data
 * Create a template HTML file called `index.html` that will take the Mars Data Dictionary and display all of the data in the appropriate HTML elements
+
+### Step # - Add Bootstrap 3 Components
+
+* Updated  web app to make it mobile-responsive, and added two additional Bootstrap 3 components to make it stand out.
