@@ -110,7 +110,7 @@ def mars_facts():
     # If running as script, print scraped data
     print(scrape_all())
 
-def hemispheres(browser):
+def hemisphere_image_urls(browser):
     # 1. Use browser to visit the URL 
     url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(url)
